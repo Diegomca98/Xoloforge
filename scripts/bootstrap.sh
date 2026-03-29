@@ -3,8 +3,8 @@ set -euo pipefail
 
 # ── Config ────────────────────────────────────────────────
 AWS_REGION="${AWS_REGION:-us-east-1}"
-BUCKET_NAME="${TF_STATE_BUCKET:-cv-platform-tfstate}"
-DYNAMODB_TABLE="${TF_LOCK_TABLE:-cv-platform-tf-locks}"
+BUCKET_NAME="${TF_STATE_BUCKET:-xoloforge-tfstate-bkt}"
+DYNAMODB_TABLE="${TF_LOCK_TABLE:-xoloforge-tf-locks}"
 # ─────────────────────────────────────────────────────────
 
 echo "Bootstrapping Terraform backend..."
