@@ -9,7 +9,7 @@ locals {
 }
 
 module "networking" {
-  source = "../../modules/networking"
+  source = "../../modules/1.networking"
 
   project_name = var.project_name
   environment = local.environment
