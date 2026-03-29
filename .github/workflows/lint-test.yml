@@ -1,0 +1,19 @@
+# TODO: Implement lint-test pipeline
+# Covers: Python services, Terraform, YAML/JSON lint
+# Pending: path-filtered matrix jobs per service
+name: Lint & Test
+on:
+  push:
+    branches:
+      - "feature/**"
+      - "fix/**"
+      - "infra/**"
+      - "docs/**"
+  pull_request:
+    branches:
+      - develop
+jobs:
+  placeholder:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "CI pipeline coming soon"
