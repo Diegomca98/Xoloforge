@@ -69,6 +69,15 @@ module "eks_role_general_node_group" {
 /******** EKS ********/
 /*********************/
 
+module "eks_cluster" {
+  source = "../../modules/3.eks/"
+
+  cluster_name = "${var.project_name}-${local.environment}-eks-cluster"
+  vpc_id     = module.networking.vpc_id
+  subnet_ids = var.subnet_ids
+
+  common_tags = local.common_tags
+}
 
 /*********************************/
 /******** End EKS Section ********/
