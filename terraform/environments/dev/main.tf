@@ -74,7 +74,7 @@ module "eks_cluster" {
 
   cluster_name = "${var.project_name}-${local.environment}-eks-cluster"
   vpc_id     = module.networking.vpc_id
-  subnet_ids = var.subnet_ids
+  subnet_ids = module.networking.private_subnet_ids
 
   common_tags = local.common_tags
 }
