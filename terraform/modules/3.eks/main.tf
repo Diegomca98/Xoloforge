@@ -18,6 +18,7 @@ module "eks" {
 
   vpc_id     = var.vpc_id
   subnet_ids = var.subnet_ids
+  enable_irsa = true
 
   tags = var.common_tags
 }
