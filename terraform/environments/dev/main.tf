@@ -74,6 +74,35 @@ module "github_oidc" {
 /******** ECR ********/
 /*********************/
 
+module "ecr_builder" {
+  source = "../../modules/4.ecr"
+
+  ecr_repo_name = "xoloforge-builder-service"
+  common_tags = local.common_tags
+}
+
+module "ecr_improver" {
+  source = "../../modules/4.ecr"
+
+  ecr_repo_name = "xoloforge-improver-service"
+  common_tags = local.common_tags
+}
+
+module "ecr_scout" {
+  source = "../../modules/4.ecr"
+
+  ecr_repo_name = "xoloforge-scout-service"
+  common_tags = local.common_tags
+}
+
+module "mcp" {
+  source = "../../modules/4.ecr"
+
+  ecr_repo_name = "xoloforge-mcp-service"
+  common_tags = local.common_tags
+}
+
+
 /*********************************/
 /******** End ECR Section ********/
 /*********************************/
