@@ -27,15 +27,18 @@ module "networking" {
 /******** End VPC Section ********/
 /*********************************/
 
-/*********************/
-/******** IAM ********/
-/*********************/
+
+
+/***************************/
+/******** IAM - EKS ********/
+/***************************/
 module "eks_role_control_plane" {
   source = "../../modules/2.iam/iam_role_eks"
 
   iam_role_name = "${var.project_name}-${local.environment}-control-plane-role"
   iam_role_principal = ["eks.amazonaws.com"]
   iam_role_policies = var.iam_role_policies_control_plane
+  common_tags = local.common_tags
 }
 module "eks_role_general_node_group" {
   source = "../../modules/2.iam/iam_role_eks"
@@ -43,14 +46,28 @@ module "eks_role_general_node_group" {
   iam_role_name = "${var.project_name}-${local.environment}-node-group-role"
   iam_role_principal = ["ec2.amazonaws.com"]
   iam_role_policies = var.iam_role_policies_node_groups
+  common_tags = local.common_tags
 }
 
-/*********************************/
-/******** End IAM Section ********/
-/*********************************/
+/*************************************/
+/******** End IAM EKS Section ********/
+/*************************************/
 
 
+/************************/
+/***** IAM - Github *****/
+/************************/
 
+module "github_oidc" {
+  source = "../../modules/2.iam/iam_role_github"
+
+  role_name = "xoloforge-github-actions-role"
+  common_tags = local.common_tags
+}
+
+/**********************************/
+/***** End IAM Github Section *****/
+/**********************************/
 
 
 /*********************/
