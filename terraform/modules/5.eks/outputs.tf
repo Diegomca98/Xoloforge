@@ -17,3 +17,13 @@ output "eks_oidc_provider_arn" {
   value = module.eks.oidc_provider_arn
   description = "Xoloforge EKS OIDC Provider ARN"
 }
+
+output "node_iam_role_arn" {
+  value = module.eks.node_iam_role_arn
+  description = "EKS Auto node IAM role ARN"
+}
+
+output "eks_managed_node_groups" {
+  value = module.eks.eks_managed_node_groups
+  description = "Map of attribute maps for all EKS managed node groups created"
+}
