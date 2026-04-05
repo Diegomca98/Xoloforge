@@ -1,6 +1,7 @@
 variable "cluster_name" {
   type = string
   description = "EKS Cluster name"
+}
 
 variable "vpc_id" {
   type = string
@@ -15,4 +16,10 @@ variable "subnet_ids" {
 variable "common_tags" {
   type = map(string)
   description = "Tags all resources have"
+}
+
+variable "enable_gpu_nodepool" {
+  type = bool
+  default = false
+  description = "Create GPU Nodepool"
 }
