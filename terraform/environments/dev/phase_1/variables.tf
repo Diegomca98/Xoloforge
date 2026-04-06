@@ -27,3 +27,9 @@ variable "iam_role_policies_node_groups" {
     AmazonEC2ContainerRegistryReadOnly = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   }
 }
+
+variable "domain_name" {
+  type = string
+  default = "xoloforge.com"
+  description = "Public DNS for the Xoloforge app"
+}
