@@ -8,6 +8,11 @@ output "cluster_id" {
   description = "Xoloforge EKS Cluster ID"
 }
 
+output "cluster_endpoint" {
+  value = module.eks.cluster_endpoint
+  description = "EKS Cluster Endpoint"
+}
+
 output "eks_oidc_provider" {
   value = module.eks.oidc_provider
   description = "Xoloforge EKS OIDC Provider"
