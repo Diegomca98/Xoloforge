@@ -13,6 +13,16 @@ variable "subnet_ids" {
   description = "Subnets that belong to the VPC"
 }
 
+variable "control_plane_iam_role_arn" {
+  type = string
+  description = "IAM Role ARN - Control Plane"
+}
+
+variable "node_groups_iam_role_arn" {
+  type = string
+  description = "IAM Role ARN - Node Groups"
+}
+
 variable "common_tags" {
   type = map(string)
   description = "Tags all resources have"

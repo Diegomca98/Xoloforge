@@ -16,6 +16,8 @@ module "eks" {
   subnet_ids = var.subnet_ids
   enable_irsa = true
 
+  iam_role_arn = var.control_plane_iam_role_arn
+
   eks_managed_node_groups = {
     core_app = {
       instance_types = ["t3.medium"]
@@ -23,6 +25,7 @@ module "eks" {
       max_size = 3
       desired_size = 2
       capacity_type = "ON_DEMAND"
+      iam_role_arn = var.node_groups_iam_role_arn
       create = true
     },
     agents = {
@@ -31,6 +34,7 @@ module "eks" {
       max_size = 3
       desired_size = 0
       capacity_type = "SPOT"
+      iam_role_arn = var.node_groups_iam_role_arn
       create = var.enable_gpu_nodepool
       taints = [
         {
