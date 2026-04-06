@@ -81,7 +81,7 @@ module "ecr_builder" {
   source = "../../../modules/4.ecr"
 
   ecr_repo_name = "xoloforge-builder-service"
-  github_actions_role_arn = module.ecr_builder.repository_arn
+  github_actions_role_arn = module.github_oidc.oidc_role
   common_tags = local.common_tags
 }
 
@@ -89,7 +89,7 @@ module "ecr_improver" {
   source = "../../../modules/4.ecr"
 
   ecr_repo_name = "xoloforge-improver-service"
-  github_actions_role_arn = module.ecr_improver.repository_arn
+  github_actions_role_arn = module.github_oidc.oidc_role
   common_tags = local.common_tags
 }
 
@@ -97,7 +97,7 @@ module "ecr_scout" {
   source = "../../../modules/4.ecr"
 
   ecr_repo_name = "xoloforge-scout-service"
-  github_actions_role_arn = module.ecr_scout.repository_arn
+  github_actions_role_arn = module.github_oidc.oidc_role
   common_tags = local.common_tags
 }
 
@@ -105,7 +105,7 @@ module "mcp" {
   source = "../../../modules/4.ecr"
 
   ecr_repo_name = "xoloforge-mcp-service"
-  github_actions_role_arn = module.mcp.repository_arn
+  github_actions_role_arn = module.github_oidc.oidc_role
   common_tags = local.common_tags
 }
 
@@ -121,11 +121,14 @@ module "mcp" {
 /*********************/
 
 module "eks_cluster" {
-  source = "../../../modules/3.eks/"
+  source = "../../../modules/5.eks/"
 
   cluster_name = "${var.project_name}-${local.environment}-eks-cluster"
   vpc_id     = module.networking.vpc_id
   subnet_ids = module.networking.private_subnet_ids
+  
+  control_plane_iam_role_arn = module.eks_role_control_plane.role_arn
+  node_groups_iam_role_arn = module.eks_role_general_node_group.role_arn
 
   common_tags = local.common_tags
 }
@@ -133,27 +136,3 @@ module "eks_cluster" {
 /*********************************/
 /******** End EKS Section ********/
 /*********************************/
-
-
-
-/**********************/
-/******** Helm ********/
-/**********************/
-resource "aws_route53_zone" "xoloforge" {
-  name = var.domain_name
-}
-
-module "k8s_helm_addons" {
-  source = "../../../modules/6.k8s-addons"
-
-  cluster_name = module.eks_cluster.cluster_name
-  cluster_endpoint = module.eks_cluster.cluster_endpoint
-  cluster_version = module.eks_cluster.cluster_version
-  oidc_provider_arn = module.eks.oidc_provider_arn
-
-  hosted_zone_arn = aws_route53_zone.xoloforge.arn
-}
-
-/**********************************/
-/******** End Helm Section ********/
-/**********************************/

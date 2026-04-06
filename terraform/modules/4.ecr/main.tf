@@ -31,6 +31,19 @@ module "ecr" {
         action = {
           type = "expire"
         }
+      },
+      {
+        rulePriority = 3,
+        description  = "Expire untagged images",
+        selection = {
+          tagStatus   = "untagged",
+          countType   = "sinceImagePushed",
+          countUnit   = "days",
+          countNumber = 1
+        },
+        action = {
+          type = "expire"
+        }
       }
     ]
   })

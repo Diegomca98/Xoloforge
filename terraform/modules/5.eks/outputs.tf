@@ -13,6 +13,11 @@ output "cluster_endpoint" {
   description = "EKS Cluster Endpoint"
 }
 
+output "cluster_version" {
+  value = module.eks.cluster_version
+  description = "EKS Cluster Version"
+}
+
 output "eks_oidc_provider" {
   value = module.eks.oidc_provider
   description = "Xoloforge EKS OIDC Provider"

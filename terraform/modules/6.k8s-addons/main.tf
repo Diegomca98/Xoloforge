@@ -10,6 +10,7 @@ module "eks-blueprints-addons" {
   enable_aws_load_balancer_controller = true
   enable_cert_manager = true
   enable_external_secrets = true
+  enable_external_dns = true
 
   external_dns_route53_zone_arns = [var.hosted_zone_arn]
 }
